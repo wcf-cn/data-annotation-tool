@@ -1,6 +1,8 @@
 {
   "/(auth)/login/page": "app/(auth)/login/page.js",
   "/(auth)/signup/page": "app/(auth)/signup/page.js",
+  "/(protected)/projects/[id]/page": "app/(protected)/projects/[id]/page.js",
+  "/(protected)/projects/page": "app/(protected)/projects/page.js",
   "/_global-error/page": "app/_global-error/page.js",
   "/_not-found/page": "app/_not-found/page.js",
   "/page": "app/page.js"

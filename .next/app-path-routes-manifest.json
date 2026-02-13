@@ -1,6 +1,8 @@
 {
   "/(auth)/login/page": "/login",
   "/(auth)/signup/page": "/signup",
+  "/(protected)/projects/[id]/page": "/projects/[id]",
+  "/(protected)/projects/page": "/projects",
   "/_global-error/page": "/_global-error",
   "/_not-found/page": "/_not-found",
   "/page": "/"
