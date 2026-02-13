@@ -7,9 +7,10 @@ import { Label } from '@/components/ui/label'
 
 interface SignupFormProps {
   onSubmit?: (data: { email: string; password: string; fullName: string }) => void
+  loading?: boolean
 }
 
-export function SignupForm({ onSubmit }: SignupFormProps) {
+export function SignupForm({ onSubmit, loading }: SignupFormProps) {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [fullName, setFullName] = useState('')
@@ -29,6 +30,7 @@ export function SignupForm({ onSubmit }: SignupFormProps) {
           value={fullName}
           onChange={(e) => setFullName(e.target.value)}
           required
+          disabled={loading}
         />
       </div>
       <div>
@@ -39,6 +41,7 @@ export function SignupForm({ onSubmit }: SignupFormProps) {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
+          disabled={loading}
         />
       </div>
       <div>
@@ -49,10 +52,11 @@ export function SignupForm({ onSubmit }: SignupFormProps) {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
+          disabled={loading}
         />
       </div>
-      <Button type="submit" className="w-full">
-        Sign Up
+      <Button type="submit" className="w-full" disabled={loading}>
+        {loading ? 'Signing up...' : 'Sign Up'}
       </Button>
     </form>
   )
