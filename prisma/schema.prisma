@@ -1,0 +1,167 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String   @id @default(uuid())
+  email         String   @unique
+  fullName      String?  @map("full_name")
+  avatarUrl     String?  @map("avatar_url")
+  createdAt     DateTime @default(now()) @map("created_at")
+  updatedAt     DateTime @updatedAt @map("updated_at")
+
+  ownedProjects Project[]         @relation("OwnedProjects")
+  projects      ProjectMember[]
+  annotations   Annotation[]
+  reviews       Review[]
+  models        Model[]
+  tasks         PreAnnotationTask[]
+
+  @@map("users")
+}
+
+model Project {
+  id              String   @id @default(uuid())
+  name            String
+  description     String?
+  ownerId         String   @map("owner_id")
+  status          String   @default("active")
+  annotationTypes Json?   @map("annotation_types")
+  labels          Json?
+  createdAt       DateTime @default(now()) @map("created_at")
+  updatedAt       DateTime @updatedAt @map("updated_at")
+
+  owner           User              @relation("OwnedProjects", fields: [ownerId], references: [id])
+  members         ProjectMember[]
+  datasets        Dataset[]
+  models          Model[]
+  tasks           PreAnnotationTask[]
+
+  @@map("projects")
+}
+
+model ProjectMember {
+  id        String   @id @default(uuid())
+  projectId String   @map("project_id")
+  userId    String   @map("user_id")
+  role      String
+  joinedAt  DateTime @default(now()) @map("joined_at")
+
+  project   Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  user      User      @relation(fields: [userId], references: [id])
+
+  @@unique([projectId, userId])
+  @@map("project_members")
+}
+
+model Dataset {
+  id              String   @id @default(uuid())
+  projectId       String   @map("project_id")
+  name            String
+  description     String?
+  totalImages     Int      @default(0) @map("total_images")
+  annotatedCount  Int      @default(0) @map("annotated_count")
+  createdAt       DateTime @default(now()) @map("created_at")
+
+  project         Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  images          Image[]
+  tasks           PreAnnotationTask[]
+
+  @@map("datasets")
+}
+
+model Image {
+  id           String   @id @default(uuid())
+  datasetId    String   @map("dataset_id")
+  filename     String
+  storagePath  String   @map("storage_path")
+  width        Int?
+  height       Int?
+  status       String   @default("pending")
+  uploadedBy   String   @map("uploaded_by")
+  uploadedAt   DateTime @default(now()) @map("uploaded_at")
+
+  dataset      Dataset       @relation(fields: [datasetId], references: [id], onDelete: Cascade)
+  annotations  Annotation[]
+
+  @@index([datasetId, status])
+  @@map("images")
+}
+
+model Annotation {
+  id              String   @id @default(uuid())
+  imageId         String   @map("image_id")
+  annotatorId     String   @map("annotator_id")
+  annotationType  String   @map("annotation_type")
+  data            Json
+  isPreAnnotated  Boolean  @default(false) @map("is_pre_annotated")
+  modelId         String?  @map("model_id")
+  status          String   @default("draft")
+  createdAt       DateTime @default(now()) @map("created_at")
+  updatedAt       DateTime @updatedAt @map("updated_at")
+
+  image           Image    @relation(fields: [imageId], references: [id], onDelete: Cascade)
+  annotator       User      @relation(fields: [annotatorId], references: [id])
+  reviews         Review[]
+
+  @@index([imageId, status])
+  @@map("annotations")
+}
+
+model Review {
+  id           String   @id @default(uuid())
+  annotationId String   @map("annotation_id")
+  reviewerId   String   @map("reviewer_id")
+  status       String
+  comment      String?
+  reviewedAt   DateTime @default(now()) @map("reviewed_at")
+
+  annotation   Annotation @relation(fields: [annotationId], references: [id], onDelete: Cascade)
+  reviewer     User       @relation(fields: [reviewerId], references: [id])
+
+  @@map("reviews")
+}
+
+model Model {
+  id        String   @id @default(uuid())
+  name      String
+  type      String
+  provider  String
+  config    Json?
+  isActive  Boolean  @default(true) @map("is_active")
+  createdBy String   @map("created_by")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  creator   User                @relation(fields: [createdBy], references: [id])
+  project   Project?            @relation(fields: [projectId], references: [id])
+  projectId String?             @map("project_id")
+  tasks     PreAnnotationTask[]
+
+  @@map("models")
+}
+
+model PreAnnotationTask {
+  id               String    @id @default(uuid())
+  projectId        String    @map("project_id")
+  datasetId        String    @map("dataset_id")
+  modelId          String    @map("model_id")
+  status           String    @default("pending")
+  totalImages      Int?      @map("total_images")
+  processedImages  Int?      @map("processed_images")
+  createdBy        String    @map("created_by")
+  createdAt        DateTime  @default(now()) @map("created_at")
+  completedAt      DateTime? @map("completed_at")
+
+  project          Project   @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  dataset          Dataset   @relation(fields: [datasetId], references: [id], onDelete: Cascade)
+  model            Model     @relation(fields: [modelId], references: [id])
+  creator          User      @relation(fields: [createdBy], references: [id])
+
+  @@index([status])
+  @@map("pre_annotation_tasks")
+}
