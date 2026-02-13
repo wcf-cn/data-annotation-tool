@@ -1,0 +1,13 @@
+var R=require("../../chunks/ssr/[turbopack]_runtime.js")("server/app/_not-found/page.js")
+R.c("server/chunks/ssr/CodeBuddy__worktrees_data-annotation-tool_2813a06d._.js")
+R.c("server/chunks/ssr/[root-of-the-server]__bd5fbe17._.js")
+R.c("server/chunks/ssr/3b0e9_next_dist_esm_build_templates_app-page_5211c876.js")
+R.c("server/chunks/ssr/[root-of-the-server]__d742558e._.js")
+R.c("server/chunks/ssr/[root-of-the-server]__63c7a1b5._.js")
+R.c("server/chunks/ssr/[root-of-the-server]__425c6de6._.js")
+R.c("server/chunks/ssr/[root-of-the-server]__3720200d._.js")
+R.c("server/chunks/ssr/3b0e9_next_dist_client_components_1948fe80._.js")
+R.c("server/chunks/ssr/3b0e9_next_dist_client_components_builtin_forbidden_c7ea2b08.js")
+R.c("server/chunks/ssr/706ba_data-annotation-tool__next-internal_server_app__not-found_page_actions_5a1a238d.js")
+R.m(7311)
+module.exports=R.m(7311).exports
