@@ -1,3 +1,0 @@
-module.exports=[29431,a=>{a.n(a.i(70573))},74665,a=>{a.n(a.i(68045))},93302,a=>{a.n(a.i(80199))},56949,a=>{a.n(a.i(59756))},75171,a=>{"use strict";var b=a.i(90538);function c(){return(0,b.jsxs)("main",{className:"flex min-h-screen flex-col items-center justify-center p-24",children:[(0,b.jsx)("h1",{className:"text-4xl font-bold",children:"Data Annotation Tool"}),(0,b.jsx)("p",{className:"mt-4 text-lg text-gray-600",children:"Enterprise-grade image data annotation platform"})]})}a.s(["default",()=>c])}];
-
-//# sourceMappingURL=CodeBuddy__worktrees_data-annotation-tool_0a607007._.js.map

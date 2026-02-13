@@ -1,5 +1,11 @@
 {
   "app": {
+    "[project]/CodeBuddy/.worktrees/data-annotation-tool/app/(auth)/login/page": [
+      "static/media/83afe278b6a6bb3c-s.p.3a6ba036.woff2"
+    ],
+    "[project]/CodeBuddy/.worktrees/data-annotation-tool/app/(auth)/signup/page": [
+      "static/media/83afe278b6a6bb3c-s.p.3a6ba036.woff2"
+    ],
     "[project]/CodeBuddy/.worktrees/data-annotation-tool/app/_not-found/page": [
       "static/media/83afe278b6a6bb3c-s.p.3a6ba036.woff2"
     ],

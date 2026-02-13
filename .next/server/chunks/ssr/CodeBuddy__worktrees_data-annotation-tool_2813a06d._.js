@@ -1,3 +1,0 @@
-module.exports=[72377,a=>{a.n(a.i(6558))},29431,a=>{a.n(a.i(70573))},74665,a=>{a.n(a.i(68045))},93302,a=>{a.n(a.i(80199))},56949,a=>{a.n(a.i(59756))},59756,(a,b,c)=>{"use strict";Object.defineProperty(c,"__esModule",{value:!0}),Object.defineProperty(c,"default",{enumerable:!0,get:function(){return f}});let d=a.r(90538),e=a.r(91040);function f(){return(0,d.jsx)(e.HTTPAccessErrorFallback,{status:401,message:"You're not authorized to access this page."})}("function"==typeof c.default||"object"==typeof c.default&&null!==c.default)&&void 0===c.default.__esModule&&(Object.defineProperty(c.default,"__esModule",{value:!0}),Object.assign(c.default,c),b.exports=c.default)}];
-
-//# sourceMappingURL=CodeBuddy__worktrees_data-annotation-tool_2813a06d._.js.map

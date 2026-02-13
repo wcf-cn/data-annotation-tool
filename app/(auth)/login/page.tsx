@@ -4,8 +4,17 @@ import { useRouter } from 'next/navigation'
 import { useAuth } from '@/hooks/useAuth'
 import { LoginForm } from '@/components/auth/LoginForm'
 import Link from 'next/link'
+import { AuthProvider } from '@/contexts/AuthContext'
 
 export default function LoginPage() {
+  return (
+    <AuthProvider>
+      <LoginPageContent />
+    </AuthProvider>
+  )
+}
+
+function LoginPageContent() {
   const router = useRouter()
   const { signIn } = useAuth()
 
