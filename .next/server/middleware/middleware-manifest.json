@@ -1,5 +1,5 @@
 {
-  "version": 3,
+  "sorted_middleware": [],
   "middleware": {
     "/": {
       "files": [
@@ -11,23 +11,23 @@
       "page": "/",
       "matchers": [
         {
-          "regexp": "^(?:\\/(_next\\/data\\/[^/]{1,}))?\\/projects(?:\\/((?:[^\\/#\\?]+?)(?:\\/(?:[^\\/#\\?]+?))*))?(\\\\.json)?[\\/#\\?]?$",
+          "regexp": "/:nextData(_next/data/[^/]{1,})?/projects/:path*{(\\\\.json)}?",
           "originalSource": "/projects/:path*"
         },
         {
-          "regexp": "^(?:\\/(_next\\/data\\/[^/]{1,}))?\\/datasets(?:\\/((?:[^\\/#\\?]+?)(?:\\/(?:[^\\/#\\?]+?))*))?(\\\\.json)?[\\/#\\?]?$",
+          "regexp": "/:nextData(_next/data/[^/]{1,})?/datasets/:path*{(\\\\.json)}?",
           "originalSource": "/datasets/:path*"
         },
         {
-          "regexp": "^(?:\\/(_next\\/data\\/[^/]{1,}))?\\/settings(?:\\/((?:[^\\/#\\?]+?)(?:\\/(?:[^\\/#\\?]+?))*))?(\\\\.json)?[\\/#\\?]?$",
+          "regexp": "/:nextData(_next/data/[^/]{1,})?/settings/:path*{(\\\\.json)}?",
           "originalSource": "/settings/:path*"
         },
         {
-          "regexp": "^(?:\\/(_next\\/data\\/[^/]{1,}))?\\/login(\\\\.json)?[\\/#\\?]?$",
+          "regexp": "/:nextData(_next/data/[^/]{1,})?/login{(\\\\.json)}?",
           "originalSource": "/login"
         },
         {
-          "regexp": "^(?:\\/(_next\\/data\\/[^/]{1,}))?\\/signup(\\\\.json)?[\\/#\\?]?$",
+          "regexp": "/:nextData(_next/data/[^/]{1,})?/signup{(\\\\.json)}?",
           "originalSource": "/signup"
         }
       ],
@@ -42,8 +42,6 @@
       }
     }
   },
-  "sortedMiddleware": [
-    "/"
-  ],
+  "instrumentation": null,
   "functions": {}
 }
