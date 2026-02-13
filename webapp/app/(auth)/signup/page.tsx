@@ -1,10 +1,14 @@
 'use client'
 
+import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { useAuth } from '@/hooks/useAuth'
 import { SignupForm } from '@/components/auth/SignupForm'
 import Link from 'next/link'
 import { AuthProvider } from '@/contexts/AuthContext'
+
+// Force dynamic rendering to avoid build-time errors
+export const dynamic = 'force-dynamic'
 
 export default function SignupPage() {
   return (
@@ -17,13 +21,20 @@ export default function SignupPage() {
 function SignupPageContent() {
   const router = useRouter()
   const { signUp } = useAuth()
+  const [error, setError] = useState<string | null>(null)
+  const [loading, setLoading] = useState(false)
 
   const handleSignup = async (data: { email: string; password: string; fullName: string }) => {
     try {
+      setError(null)
+      setLoading(true)
       await signUp(data.email, data.password, data.fullName)
       router.push('/projects')
-    } catch (error) {
+    } catch (error: any) {
       console.error('Signup failed:', error)
+      setError(error?.message || 'Signup failed. Please try again.')
+    } finally {
+      setLoading(false)
     }
   }
 
@@ -36,7 +47,12 @@ function SignupPageContent() {
             Data Annotation Tool
           </p>
         </div>
-        <SignupForm onSubmit={handleSignup} />
+        {error && (
+          <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded relative">
+            {error}
+          </div>
+        )}
+        <SignupForm onSubmit={handleSignup} loading={loading} />
         <p className="text-center text-sm">
           Already have an account?{' '}
           <Link href="/login" className="text-primary hover:underline">
